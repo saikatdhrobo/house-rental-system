@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Listings - House Rental System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .header nav {
+            display: flex;
+        }
+        .header nav a {
+            color: white;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .header nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .listing-container {
+            padding: 50px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .property-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .property-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Fixed Image Size */
+        .property-card img {
+            width: 100%;         /* Ensures the image fills the card width */
+            height: 200px;       /* Fixed height for consistency */
+            object-fit: cover;   /* Ensures images don't get stretched or distorted */
+            border-radius: 10px;
+        }
+
+        .property-card h3 {
+            margin: 10px 0;
+            font-size: 1.5rem;
+            color: #007bff;
+        }
+
+        .property-card p {
+            font-size: 1rem;
+            color: #777;
+        }
+
+        .property-card a {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        .property-card a:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .listing-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Navigation Bar) -->
+    <div class="header">
+        <h1>House Rental System</h1>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+
+    <!-- Main Content (Property Listings) -->
+    <div class="listing-container" id="listingContainer">
+        <!-- Properties will be loaded here dynamically -->
+    </div>
+
+    <script>
+        // Example property data with unique image for each property (In real-world scenarios, this data would come from a database)
+        const properties = [
+            {
+                id: 1,
+                name: "Saikat Apartment",
+                image: "images/saikat-apartment.jpg",  // Unique image for this property
+                bedrooms: 2,
+                bathrooms: 1,
+                price: 4000,
+                description: "A saikat apartment perfect for small families or singles."
+            },
+            {
+                id: 2,
+                name: "Fahim Villa",
+                image: "images/fahim-villa.webp",  // Unique image for this property
+                bedrooms: 4,
+                bathrooms: 3,
+                price: 9000,
+                description: "A fahim villa with a spacious layout and premium amenities."
+            },
+            {
+                id: 3,
+                name: "Kowsar Studio",
+                image: "images/kowsar-studio.jpg",  // Unique image for this property
+                bedrooms: 1,
+                bathrooms: 1,
+                price: 15000,
+                description: "A kowsar modern studio for city living."
+            },
+            {
+                id: 4,
+                name: "AL Amin Apartment",
+                image: "images/al-amin-apartment.webp",  // Add the image path for AL Amin Apartment
+                bedrooms: 3,
+                bathrooms: 2,
+                price: 6000,
+                description: "A spacious 3-bedroom apartment with modern amenities, ideal for families looking for comfort and convenience."
+            }
+        ];
+
+        // Function to render properties dynamically
+        function renderProperties() {
+            const container = document.getElementById('listingContainer');
+            container.innerHTML = ''; // Clear the container before rendering
+
+            properties.forEach(property => {
+                const card = document.createElement('div');
+                card.classList.add('property-card');
+
+                card.innerHTML = `
+                    <img src="${property.image}" alt="${property.name}">
+                    <h3>${property.name}</h3>
+                    <p>${property.bedrooms} Beds | ${property.bathrooms} Baths | ৳${property.price}/month</p>
+                    <p>${property.description}</p>
+                    <a href="property-details.html?id=${property.id}">View Details</a>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        // Call renderProperties when the page loads
+        window.onload = renderProperties;
+    </script>
+
+</body>
+</html>

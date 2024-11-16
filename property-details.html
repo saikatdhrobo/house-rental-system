@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Details - House Rental System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .header nav {
+            display: flex;
+        }
+        .header nav a {
+            color: white;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .header nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .property-details {
+            padding: 50px;
+            display: flex;
+            gap: 50px;
+        }
+        .property-details img {
+            width: 50%;
+            border-radius: 10px;
+        }
+        .property-info {
+            flex-grow: 1;
+        }
+        .property-info h2 {
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+        .property-info p {
+            font-size: 1.1rem;
+            color: #777;
+        }
+        .property-info .price {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .property-info .contact-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .property-info .contact-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .property-details {
+                flex-direction: column;
+                align-items: center;
+            }
+            .property-details img {
+                width: 80%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Navigation Bar) -->
+    <div class="header">
+        <h1>House Rental System</h1>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+
+    <!-- Property Details Section -->
+    <div class="property-details" id="propertyDetails">
+        <!-- Property Image and Info will be loaded here dynamically -->
+    </div>
+
+    <script>
+        // Example property data (this would ideally come from a database or an API)
+        const properties = [
+            {
+                id: 1,
+                name: "Saikat Apartment",
+                image: "images/saikat-apartment.jpg",
+                bedrooms: 2,
+                bathrooms: 1,
+                price: 4000,
+                description: "A saikat apartment perfect for small families or singles. Located in a calm neighborhood with great accessibility."
+            },
+            {
+                id: 2,
+                name: "Fahim Villa",
+                image: "images/fahim-villa.webp",
+                bedrooms: 4,
+                bathrooms: 3,
+                price: 9000,
+                description: "A fahim villa with a spacious layout and premium amenities. Perfect for larger families or anyone who enjoys extra space."
+            },
+            {
+                id: 3,
+                name: "Kowsar Studio",
+                image: "images/kowsar-studio.jpg",
+                bedrooms: 1,
+                bathrooms: 1,
+                price: 15000,
+                description: "A modern studio in the city center, ideal for city living. Great amenities and close to public transport."
+            },
+            {
+                id: 4,
+                name: "AL Amin Apartment",
+                image: "images/al-amin-apartment.webp",  // Add the image path for AL Amin Apartment
+                bedrooms: 3,
+                bathrooms: 2,
+                price: 6000,
+                description: "A spacious 3-bedroom apartment with modern amenities, ideal for families looking for comfort and convenience."
+            }
+        ];
+
+        // Function to get the property ID from the URL and render the property details
+        function getPropertyDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propertyId = parseInt(urlParams.get('id')); // Get the property id from the URL
+
+            // Find the property from the data array based on the id
+            const property = properties.find(p => p.id === propertyId);
+
+            if (property) {
+                // Populate the property details
+                const propertyDetailsContainer = document.getElementById('propertyDetails');
+                propertyDetailsContainer.innerHTML = `
+                    <img src="${property.image}" alt="${property.name}">
+                    <div class="property-info">
+                        <h2>${property.name}</h2>
+                        <p>${property.description}</p>
+                        <p>${property.bedrooms} Beds | ${property.bathrooms} Baths | 800 sq.ft.</p>
+                        <div class="price">৳${property.price}/month</div>
+                        <a href="contact.html" class="contact-btn">Contact Owner</a>
+                    </div>
+                `;
+            } else {
+                // In case the property is not found, show a message
+                const propertyDetailsContainer = document.getElementById('propertyDetails');
+                propertyDetailsContainer.innerHTML = `<p>Property not found.</p>`;
+            }
+        }
+
+        // Call the function to load property details on page load
+        window.onload = getPropertyDetails;
+    </script>
+
+</body>
+</html>

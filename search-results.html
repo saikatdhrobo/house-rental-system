@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - House Rental System</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fa;
+            color: #333;
+        }
+        .header {
+            background-color: #007bff;
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        .header nav {
+            display: flex;
+        }
+        .header nav a {
+            color: white;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            padding: 10px;
+            text-decoration: none;
+        }
+        .header nav a:hover {
+            background-color: #0056b3;
+            border-radius: 5px;
+        }
+
+        .results-container {
+            padding: 50px;
+        }
+        .result-card {
+            display: flex;
+            gap: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+        .result-card img {
+            width: 200px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .result-card .info {
+            flex-grow: 1;
+        }
+        .result-card h3 {
+            font-size: 1.8rem;
+            color: #007bff;
+        }
+        .result-card p {
+            font-size: 1rem;
+            color: #777;
+        }
+        .result-card button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .result-card button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .results-container {
+                padding: 20px;
+            }
+            .result-card {
+                flex-direction: column;
+                align-items: center;
+            }
+            .result-card img {
+                width: 100%;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Navigation Bar) -->
+    <div class="header">
+        <h1>House Rental System</h1>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="profile.html">Profile</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+
+    <!-- Search Results Section -->
+    <div class="results-container">
+        <div class="result-card">
+            <img src="https://via.placeholder.com/200x150" alt="Property Image">
+            <div class="info">
+                <h3>Saikat Apartment</h3>
+                <p>Located in the city center, perfect for a small family or professionals.</p>
+                <button>Book Now</button>
+            </div>
+        </div>
+
+        <div class="result-card">
+            <img src="https://via.placeholder.com/200x150" alt="Property Image">
+            <div class="info">
+                <h3>Fahim Villa</h3>
+                <p>Luxurious living with a pool and garden, ideal for larger families.</p>
+                <button>Book Now</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

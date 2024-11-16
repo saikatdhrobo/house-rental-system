@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - House Rental System</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #00c6ff, #0072ff); /* Bold gradient background */
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Header (Navigation Bar) */
+        .header {
+            background-color: linear-gradient(to right, #00c6ff, #0072ff); /* Bold gradient background */
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 1.3rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+
+        .header nav {
+            display: flex;
+        }
+
+        .header nav a {
+            color: white;
+            margin-left: 25px;
+            font-size: 1.1rem;
+            padding: 10px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .header nav a:hover {
+            background-color: #0056b3;
+            transform: scale(1.1); /* Slight scale effect on hover */
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 50px;
+            flex-grow: 1;
+            background-color: rgba(255, 255, 255, 0.9); /* Light, semi-transparent white */
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 10px;
+            text-align: center;
+            animation: fadeIn 1s ease-out; /* Add a fade-in effect */
+        }
+
+        .main-content h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Overview Section */
+        .overview {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+            margin-bottom: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .overview .card {
+            background-color: #fff;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 12px;
+            padding: 30px;
+            width: 30%;
+            text-align: center;
+            cursor: pointer;
+            text-decoration: none;
+            color: #333;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+
+        .overview .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            background-color: #f8f9fa; /* Light background change on hover */
+        }
+
+        .overview .card h3 {
+            margin-bottom: 15px;
+            font-size: 1.8rem;
+            color: #007bff;
+            font-weight: bold;
+        }
+
+        .overview .card p {
+            font-size: 1.1rem;
+            color: #777;
+        }
+
+        /* Footer Section */
+        .footer {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #777;
+            padding: 20px 0;
+            background-color: #222222;
+            border-top: 1px solid #ddd;
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .overview {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .overview .card {
+                width: 90%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Section (Top Navigation Bar) -->
+    <div class="header">
+        <h1>House Rental System</h1>
+        <nav>
+            <a href="profile.html">Profile</a>
+            <!-- New Contact Option -->
+            <a href="contact-admin.html">Contact</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
+
+    <!-- Main Content (Dashboard) -->
+    <div class="main-content">
+        <h2>Welcome, <span id="user-name">Kowsar Islam</span>!</h2>
+
+        <!-- Overview Section -->
+        <div class="overview">
+            <!-- Booked Properties Card -->
+            <a href="profile.html" class="card">
+                <h3>Booked Properties</h3>
+                <p>View and manage your current bookings</p>
+            </a>
+            <!-- Property Listings Card -->
+            <a href="listings.html" class="card">
+                <h3>Property Listings</h3>
+                <p>Browse available properties for rent</p>
+            </a>
+            <!-- Your Profile Card -->
+            <a href="profile.html" class="card">
+                <h3>Your Profile</h3>
+                <p>View and edit your account details</p>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2024 House Rental System. All Rights Reserved.</p>
+    </div>
+
+    <script>
+        // Dynamic User Name (to be replaced with actual user data)
+        const userName = "Kowsar Islam"; // Dynamic user name
+        document.getElementById('user-name').textContent = userName;
+    </script>
+
+</body>
+</html>

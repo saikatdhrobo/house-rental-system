@@ -15,7 +15,7 @@ It is a Software Engineering Project aimed at developing a **House Rental System
 ---
 
 ### Technologies Used:
-- **Frontend**: HTML, CSS, JavaScript
+- **Frontend**: HTML, CSS, and JavaScript
 - **Backend**: FastAPI
-- **Database**: MySQL
+- **Database**: SQLAlchemy
 

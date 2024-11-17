@@ -2,8 +2,7 @@
 
 ## Project Overview
 
-It is a Software Engineering Project aimed at developing a **House Rental System** for managing rental properties, tenants, and transactions.
-
+It is a Software Engineering Project aimed at developing a **House Rental System** for managing rental properties and tenants.
 ---
 
 ### Authors:

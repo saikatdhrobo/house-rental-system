@@ -1,26 +1,31 @@
-from database import Base
-from sqlalchemy import Column, Integer, String, Boolean, ForeignKey
+from sqlmodel import SQLModel, Field, Relationship
+from pydantic import EmailStr
+from datetime import date, datetime
 
+class User(SQLModel, table=True):
+    __tablename__ = "users"
 
-class Users(Base):
-    __tablename__ = 'users'
+    id: int = Field(primary_key=True, index=True, default=None)
+    first_name: str
+    last_name: str | None
+    email: EmailStr = Field(unique=True, index=True)
+    contact: str = Field(unique=True)
+    password: str
+    is_active: bool | None = Field(default=False)
+    is_admin: bool | None = Field(default=False)
+    ac_creation: date = Field(default=None)
+    ac_updation: date | None = Field(default=None)
 
-    id = Column(Integer, primary_key=True, index=True)
-    email = Column(String, unique=True)
-    username = Column(String, unique=True)
-    first_name = Column(String)
-    last_name = Column(String)
-    hashed_password = Column(String)
-    is_active = Column(Boolean, default=True)
-    role = Column(String)
+    rents: list["Rents"] = Relationship(back_populates="user")
 
+class Rents(SQLModel, table=True):
+    __tablename__ = 'rents'
 
-class Todos(Base):
-    __tablename__ = 'todos'
-
-    id = Column(Integer, primary_key=True, index=True)
-    title = Column(String)
-    description = Column(String)
-    priority = Column(Integer)
-    complete = Column(Boolean, default=False)
-    owner_id = Column(Integer, ForeignKey("users.id"))
+    id: int = Field(primary_key=True, index=True, default=None)
+    user_id: int = Field(foreign_key="users.id")
+    title: str
+    description: str
+    location: str
+    price: float
+    created_at: datetime | None = Field(default= datetime.now())
+    user: User = Relationship(back_populates='rents')

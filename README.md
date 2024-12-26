@@ -1,20 +1,8 @@
-# House Rental System
+# React + Vite
 
-## Project Overview
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-It is a Software Engineering Project aimed at developing a **House Rental System** for managing rental properties and tenants.
----
+Currently, two official plugins are available:
 
-### Authors:
-- **MD Tasnim Mahmud Fahim**
-- **Jakaria Saikat Dhrobo**
-- **MD Kowsar Islam**
-- **MD Al-Amin**
-
----
-
-### Technologies Used:
-- **Frontend**: HTML, CSS, and JavaScript
-- **Backend**: FastAPI
-- **Database**: SQLAlchemy
-
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh

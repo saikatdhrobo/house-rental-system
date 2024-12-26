@@ -1,4 +1,4 @@
-# House Rental System
+# House Rental System.
 
 ## Project Overview
 

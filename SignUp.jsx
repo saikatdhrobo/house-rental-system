@@ -53,7 +53,7 @@ const SignUp = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <div className={styles.mainContainer}>
 
         <h2 className={styles.headline}>Register Your Account</h2>

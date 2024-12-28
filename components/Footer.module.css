@@ -1,0 +1,22 @@
+.mainContainer {
+    background-color: rgb(96, 120, 175);
+    top: 0;
+    text-align: center;
+    margin-top:  0%;
+    margin-bottom: 10%;
+}
+
+hr {
+    border: 3px solid rgb(251, 251, 251);
+    background-image: url('/path/to/your/image.jpg'); /* Path to your image */
+    background-size: cover; /* Ensures the image covers the entire container */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+    
+}
+
+.Link {
+    text-decoration: blueviolet;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+}

@@ -1,0 +1,87 @@
+
+/* PersonalAds.module.css */
+.navcontainer {
+    background-color: #e0f2f7; /* Light blue background for navbar */
+    padding: 15px 20px;
+    border-bottom: 1px solid #bbdefb; /* Slightly darker blue border */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* subtle shadow */
+}
+
+.container {
+    background-color: #ff2323; /* White background for the form container */
+    padding: 30px;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* More pronounced shadow */
+    margin-top: 20px; /* Space between navbar and form */
+}
+
+.form-label {
+    font-weight: 600; /* Slightly bolder labels */
+    color: #11587b; /* Darker gray for labels */
+}
+
+.form-control {
+    border: 1px solid #01090c; /* Light gray border for inputs */
+    border-radius: 4px; /* Slightly rounded input corners */
+    padding: 10px;
+    margin-bottom: 15px; /* Spacing between input groups */
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.form-control:focus {
+    border-color: #007de3; /* Blue border on focus */
+    outline: none;
+    box-shadow: 0 0 0 0.2rem rgba(100, 181, 246, 0.25); /* Subtle blue focus ring */
+}
+
+.Button {
+    border: solid;
+    color: #37474f;
+    background-color: #4caf50; /* A more vibrant green */
+    border-color: #000000;
+    height: fit-content;
+    padding: 12px 25px;
+    font-weight: 500;
+    border-radius: 40px;
+    transition: background-color 0.3s ease; /* Smooth transition on hover */
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.Button:hover {
+    background-color: #43a047; /* Darker green on hover */
+    border-color: #000000;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.Button:active {
+    background-color: #388e3c; /* Even darker green on active/click */
+    border-color: #388e3c;
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+    transform: translateY(1px); /* Little press effect */
+}
+
+.btn-danger {
+    height: 1%;
+    background-color: #f44336 !important;
+    border-color: #f44336 !important;
+    padding: 10px 20px;
+    border-radius: 29px;
+    width: 1%;
+    transition: background-color 0.3s ease;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+
+}
+
+.btn-danger:hover {
+    background-color: #ccc2c2 !important;
+    border-color: #b49e9e !important;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+
+}
+
+.btn-danger:active {
+    background-color: #c62828 !important;
+    border-color: #c62828 !important;
+    box-shadow: inset 0 2px 2px rgba(0,0,0,0.2);
+    transform: translateY(1px);
+}

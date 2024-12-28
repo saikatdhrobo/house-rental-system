@@ -1,0 +1,55 @@
+.projectContainer {
+    background-color: rgb(171, 0, 0);
+}
+
+.headline {
+    background-color: rgb(250, 132, 132);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 40%;
+    padding-right: 5%;
+}
+
+.projectDetailsInfor {
+    background-color: rgb(254, 184, 242);
+    justify-items: center;
+    /* padding-top: 2px; */
+    /* border: dashed black; */
+    border-radius: 40px;
+    border: 3px dashed rgb(170, 43, 43);
+    margin: 10px;
+    padding: 8px;
+    cursor: pointer;
+    transition: .5s;
+}
+
+.projectDetailsInfor:hover {
+    background-color: rgb(34, 134, 70);
+}
+
+
+.cardContainer{
+    position: static;
+    animation: forwards;
+    background-color: rgba(148, 165, 178, 0.93);
+}
+
+.mainCard{
+    align-content: center;
+    position: relative;
+    border-color: black;
+    border-radius: 2%;
+    border-width: 4%;
+    background-color: rgb(150, 189, 215);
+}
+.mainContainer button{
+    border-radius: 10px;
+    width: 23%;
+    background-color: rgb(229, 140, 140);
+}
+
+.mainContainer button:hover {
+    background-color: rgb(255, 17, 17);
+    color: white;
+}

@@ -1,0 +1,38 @@
+.mainContainer {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(189, 248, 242);
+    border-radius: 5px;
+    align-items: center;
+    padding: .5%;
+    padding-left: 4%;
+    padding-right: 6%;
+    /* position: relative; */
+}
+
+.mainContainer p {
+    font-size: larger;
+    /* font-weight: bold; */
+    cursor: pointer;
+    transition: .4s;
+}
+
+.mainContainer p:hover {
+    font-weight: bolder;
+    transition: .4s;
+    color: rgb(124, 124, 172);
+}
+
+.mainContainer li.actv {
+    color: rgb(245, 48, 255);
+    font-weight: bold;
+}
+
+.mainContainer button:hover {
+    background-color: rgb(248, 75, 75);
+    color: white;
+}
+
+.profileDiv {
+    color: red;
+}

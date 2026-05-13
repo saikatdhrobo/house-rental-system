@@ -1,27 +1,27 @@
-from typing import Annotated
-from pydantic import BaseModel, Field
+from flask import Blueprint, request, jsonify
+from pydantic import BaseModel, Field, ValidationError
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, HTTPException, Path
-from starlette import status
+
 from models import Todos
 from database import SessionLocal
-from .auth import get_current_user
+from routers.auth import get_current_user
+todos_bp = Blueprint("todos", __name__)
 
-router = APIRouter()
 
-
+# -----------------------------
+# Database Connection
+# -----------------------------
 def get_db():
     db = SessionLocal()
     try:
-        yield db
+        return db
     finally:
         db.close()
 
 
-db_dependency = Annotated[Session, Depends(get_db)]
-user_dependency = Annotated[dict, Depends(get_current_user)]
-
-
+# -----------------------------
+# Pydantic Model
+# -----------------------------
 class TodoRequest(BaseModel):
     title: str = Field(min_length=3)
     description: str = Field(min_length=3, max_length=100)
@@ -29,78 +29,185 @@ class TodoRequest(BaseModel):
     complete: bool
 
 
-@router.get("/", status_code=status.HTTP_200_OK)
-async def read_all(user: user_dependency, db: db_dependency):
+# -----------------------------
+# GET ALL TODOS
+# -----------------------------
+@todos_bp.route("/", methods=["GET"])
+def read_all():
+    user = get_current_user()
+
     if user is None:
-        raise HTTPException(status_code=401, detail='Authentication Failed')
-    return db.query(Todos).filter(Todos.owner_id == user.get('id')).all()
+        return jsonify({
+            "detail": "Authentication Failed"
+        }), 401
+
+    db: Session = get_db()
+
+    todos = db.query(Todos).filter(
+        Todos.owner_id == user.get("id")
+    ).all()
+
+    return jsonify([
+        {
+            "id": todo.id,
+            "title": todo.title,
+            "description": todo.description,
+            "priority": todo.priority,
+            "complete": todo.complete,
+            "owner_id": todo.owner_id
+        }
+        for todo in todos
+    ]), 200
 
 
-@router.get("/todo/{todo_id}", status_code=status.HTTP_200_OK)
-async def read_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
+# -----------------------------
+# GET SINGLE TODO
+# -----------------------------
+@todos_bp.route("/todo/<int:todo_id>", methods=["GET"])
+def read_todo(todo_id):
+    user = get_current_user()
+
     if user is None:
-        raise HTTPException(status_code=401, detail='Authentication Failed')
+        return jsonify({
+            "detail": "Authentication Failed"
+        }), 401
 
-    todo_model = db.query(Todos).filter(Todos.id == todo_id)\
-        .filter(Todos.owner_id == user.get('id')).first()
+    db: Session = get_db()
+
+    todo_model = db.query(Todos).filter(
+        Todos.id == todo_id,
+        Todos.owner_id == user.get("id")
+    ).first()
+
     if todo_model is not None:
-        return todo_model
-    raise HTTPException(status_code=404, detail='Todo not found.')
+        return jsonify({
+            "id": todo_model.id,
+            "title": todo_model.title,
+            "description": todo_model.description,
+            "priority": todo_model.priority,
+            "complete": todo_model.complete,
+            "owner_id": todo_model.owner_id
+        }), 200
+
+    return jsonify({
+        "detail": "Todo not found."
+    }), 404
 
 
-@router.post("/todo", status_code=status.HTTP_201_CREATED)
-async def create_todo(user: user_dependency, db: db_dependency,
-                      todo_request: TodoRequest):
+# -----------------------------
+# CREATE TODO
+# -----------------------------
+@todos_bp.route("/todo", methods=["POST"])
+def create_todo():
+    user = get_current_user()
+
     if user is None:
-        raise HTTPException(status_code=401, detail='Authentication Failed')
-    todo_model = Todos(**todo_request.model_dump(), owner_id=user.get('id'))
+        return jsonify({
+            "detail": "Authentication Failed"
+        }), 401
 
-    db.add(todo_model)
-    db.commit()
+    try:
+        todo_request = TodoRequest(**request.json)
+
+        db: Session = get_db()
+
+        todo_model = Todos(
+            title=todo_request.title,
+            description=todo_request.description,
+            priority=todo_request.priority,
+            complete=todo_request.complete,
+            owner_id=user.get("id")
+        )
+
+        db.add(todo_model)
+        db.commit()
+
+        return jsonify({
+            "message": "Todo created successfully"
+        }), 201
+
+    except ValidationError as e:
+        return jsonify({
+            "errors": e.errors()
+        }), 400
 
 
-@router.put("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def update_todo(user: user_dependency, db: db_dependency,
-                      todo_request: TodoRequest,
-                      todo_id: int = Path(gt=0)):
+# -----------------------------
+# UPDATE TODO
+# -----------------------------
+@todos_bp.route("/todo/<int:todo_id>", methods=["PUT"])
+def update_todo(todo_id):
+    user = get_current_user()
+
     if user is None:
-        raise HTTPException(status_code=401, detail='Authentication Failed')
+        return jsonify({
+            "detail": "Authentication Failed"
+        }), 401
 
-    todo_model = db.query(Todos).filter(Todos.id == todo_id)\
-        .filter(Todos.owner_id == user.get('id')).first()
+    try:
+        todo_request = TodoRequest(**request.json)
+
+        db: Session = get_db()
+
+        todo_model = db.query(Todos).filter(
+            Todos.id == todo_id,
+            Todos.owner_id == user.get("id")
+        ).first()
+
+        if todo_model is None:
+            return jsonify({
+                "detail": "Todo not found."
+            }), 404
+
+        todo_model.title = todo_request.title
+        todo_model.description = todo_request.description
+        todo_model.priority = todo_request.priority
+        todo_model.complete = todo_request.complete
+
+        db.add(todo_model)
+        db.commit()
+
+        return jsonify({
+            "message": "Todo updated successfully"
+        }), 200
+
+    except ValidationError as e:
+        return jsonify({
+            "errors": e.errors()
+        }), 400
+
+
+# -----------------------------
+# DELETE TODO
+# -----------------------------
+@todos_bp.route("/todo/<int:todo_id>", methods=["DELETE"])
+def delete_todo(todo_id):
+    user = get_current_user()
+
+    if user is None:
+        return jsonify({
+            "detail": "Authentication Failed"
+        }), 401
+
+    db: Session = get_db()
+
+    todo_model = db.query(Todos).filter(
+        Todos.id == todo_id,
+        Todos.owner_id == user.get("id")
+    ).first()
+
     if todo_model is None:
-        raise HTTPException(status_code=404, detail='Todo not found.')
+        return jsonify({
+            "detail": "Todo not found."
+        }), 404
 
-    todo_model.title = todo_request.title
-    todo_model.description = todo_request.description
-    todo_model.priority = todo_request.priority
-    todo_model.complete = todo_request.complete
-
-    db.add(todo_model)
-    db.commit()
-
-
-@router.delete("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
-    if user is None:
-        raise HTTPException(status_code=401, detail='Authentication Failed')
-
-    todo_model = db.query(Todos).filter(Todos.id == todo_id)\
-        .filter(Todos.owner_id == user.get('id')).first()
-    if todo_model is None:
-        raise HTTPException(status_code=404, detail='Todo not found.')
-    db.query(Todos).filter(Todos.id == todo_id).filter(Todos.owner_id == user.get('id')).delete()
+    db.query(Todos).filter(
+        Todos.id == todo_id,
+        Todos.owner_id == user.get("id")
+    ).delete()
 
     db.commit()
 
-
-
-
-
-
-
-
-
-
-
-
+    return jsonify({
+        "message": "Todo deleted successfully"
+    }), 200

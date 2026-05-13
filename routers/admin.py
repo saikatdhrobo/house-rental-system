@@ -1,50 +1,67 @@
-from typing import Annotated
-from pydantic import BaseModel, Field
+from flask import Blueprint, jsonify
 from sqlalchemy.orm import Session
-from fastapi import APIRouter, Depends, HTTPException, Path
-from starlette import status
+
 from models import Todos
 from database import SessionLocal
-from .auth import get_current_user
+from routers.auth import get_current_user
 
-router = APIRouter(
-    prefix='/admin',
-    tags=['admin']
-)
+admin_bp = Blueprint("admin", __name__)
 
 
+# Database session
 def get_db():
     db = SessionLocal()
     try:
-        yield db
+        return db
     finally:
         db.close()
 
 
-db_dependency = Annotated[Session, Depends(get_db)]
-user_dependency = Annotated[dict, Depends(get_current_user)]
+# GET ALL TODOS (Admin only)
+@admin_bp.route("/todo", methods=["GET"])
+def read_all():
+    user = get_current_user()
+
+    if user is None or user.get("user_role") != "admin":
+        return jsonify({"detail": "Authentication Failed"}), 401
+
+    db: Session = get_db()
+
+    todos = db.query(Todos).all()
+
+    return jsonify([
+        {
+            "id": todo.id,
+            "title": todo.title,
+            "description": todo.description,
+            "priority": todo.priority,
+            "complete": todo.complete,
+            "owner_id": todo.owner_id
+        }
+        for todo in todos
+    ]), 200
 
 
-@router.get("/todo", status_code=status.HTTP_200_OK)
-async def read_all(user: user_dependency, db: db_dependency):
-    if user is None or user.get('user_role') != 'admin':
-        raise HTTPException(status_code=401, detail='Authentication Failed')
-    return db.query(Todos).all()
+# DELETE TODO (Admin only)
+@admin_bp.route("/todo/<int:todo_id>", methods=["DELETE"])
+def delete_todo(todo_id):
+    user = get_current_user()
 
+    if user is None or user.get("user_role") != "admin":
+        return jsonify({"detail": "Authentication Failed"}), 401
 
-@router.delete("/todo/{todo_id}", status_code=status.HTTP_204_NO_CONTENT)
-async def delete_todo(user: user_dependency, db: db_dependency, todo_id: int = Path(gt=0)):
-    if user is None or user.get('user_role') != 'admin':
-        raise HTTPException(status_code=401, detail='Authentication Failed')
+    if todo_id <= 0:
+        return jsonify({"detail": "Invalid todo ID"}), 400
+
+    db: Session = get_db()
+
     todo_model = db.query(Todos).filter(Todos.id == todo_id).first()
+
     if todo_model is None:
-        raise HTTPException(status_code=404, detail='Todo not found.')
+        return jsonify({"detail": "Todo not found."}), 404
+
     db.query(Todos).filter(Todos.id == todo_id).delete()
+
     db.commit()
 
-
-
-
-
-
-
+    return jsonify({"message": "Todo deleted successfully"}), 200

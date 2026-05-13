@@ -1,191 +1,1180 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Property Listings - Kaliakair Rental Solution</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Property Listings • Kaliakair Rental
+    </title>
+
+    <!-- GOOGLE FONT -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f7fa;
-            color: #333;
-        }
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-        .header nav {
-            display: flex;
-        }
-        .header nav a {
-            color: white;
-            margin-left: 25px;
-            font-size: 1.1rem;
-            padding: 10px;
-            text-decoration: none;
-        }
-        .header nav a:hover {
-            background-color: #0056b3;
-            border-radius: 5px;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        .listing-container {
-            padding: 50px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
+        :root{
+
+            --bg:#0f172a;
+
+            --card:
+                rgba(255,255,255,0.08);
+
+            --border:
+                rgba(255,255,255,0.12);
+
+            --text:#f8fafc;
+
+            --muted:#cbd5e1;
+
+            --primary:#2563eb;
+
+            --primary-hover:#1d4ed8;
+
+            --shadow:
+                0 10px 35px rgba(0,0,0,0.35);
         }
 
-        .property-card {
-            background-color: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            transition: all 0.3s ease;
+        body{
+
+            font-family:'Inter',sans-serif;
+
+            background:var(--bg);
+
+            color:var(--text);
+
+            overflow-x:hidden;
         }
 
-        .property-card:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        /* BACKGROUND */
+
+        .background{
+
+            position:fixed;
+
+            inset:0;
+
+            z-index:-1;
+
+            overflow:hidden;
         }
 
-        /* Fixed Image Size */
-        .property-card img {
-            width: 100%;         /* Ensures the image fills the card width */
-            height: 200px;       /* Fixed height for consistency */
-            object-fit: cover;   /* Ensures images don't get stretched or distorted */
-            border-radius: 10px;
+        .blur{
+
+            position:absolute;
+
+            border-radius:50%;
+
+            filter:blur(90px);
         }
 
-        .property-card h3 {
-            margin: 10px 0;
-            font-size: 1.5rem;
-            color: #007bff;
+        .blur-1{
+
+            width:350px;
+            height:350px;
+
+            background:
+                rgba(37,99,235,0.22);
+
+            top:-120px;
+            left:-100px;
         }
 
-        .property-card p {
-            font-size: 1rem;
-            color: #777;
+        .blur-2{
+
+            width:320px;
+            height:320px;
+
+            background:
+                rgba(14,165,233,0.18);
+
+            bottom:-120px;
+            right:-100px;
         }
 
-        .property-card a {
-            display: inline-block;
-            margin-top: 15px;
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
+        /* NAVBAR */
+
+        .navbar{
+
+            position:sticky;
+            top:0;
+
+            z-index:999;
+
+            padding:20px 6%;
+
+            backdrop-filter:blur(18px);
+
+            background:
+                rgba(15,23,42,0.75);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
         }
 
-        .property-card a:hover {
-            background-color: #0056b3;
+        .nav-wrapper{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .listing-container {
-                grid-template-columns: 1fr 1fr;
+        .logo{
+
+            font-size:1.7rem;
+
+            font-weight:800;
+
+            letter-spacing:-1px;
+        }
+
+        .logo span{
+            color:#38bdf8;
+        }
+
+        .nav-links{
+
+            display:flex;
+            align-items:center;
+
+            gap:16px;
+        }
+
+        .nav-links a{
+
+            text-decoration:none;
+
+            color:var(--muted);
+
+            padding:10px 18px;
+
+            border-radius:14px;
+
+            transition:0.25s ease;
+
+            font-weight:500;
+        }
+
+        .nav-links a:hover{
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color:white;
+        }
+
+        /* HERO */
+
+        .hero{
+
+            width:min(1400px,92%);
+            margin:auto;
+
+            padding:70px 0 30px;
+
+            text-align:center;
+        }
+
+        .hero h1{
+
+            font-size:4rem;
+
+            margin-bottom:18px;
+
+            letter-spacing:-2px;
+        }
+
+        .hero h1 span{
+            color:#38bdf8;
+        }
+
+        .hero p{
+
+            max-width:760px;
+
+            margin:auto;
+
+            color:var(--muted);
+
+            line-height:1.9;
+
+            font-size:1.05rem;
+        }
+
+        /* FILTERS */
+
+        .filters{
+
+            width:min(1400px,92%);
+            margin:40px auto 10px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            gap:20px;
+
+            flex-wrap:wrap;
+        }
+
+        .search-box{
+
+            flex:1;
+
+            position:relative;
+
+            min-width:280px;
+        }
+
+        .search-box i{
+
+            position:absolute;
+
+            top:50%;
+            left:18px;
+
+            transform:translateY(-50%);
+
+            color:#94a3b8;
+        }
+
+        .search-box input{
+
+            width:100%;
+
+            padding:16px 20px 16px 50px;
+
+            border:none;
+
+            outline:none;
+
+            border-radius:18px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color:white;
+
+            font-size:1rem;
+        }
+
+        .search-box input:focus{
+
+            border-color:#2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.15);
+        }
+
+        .filter-actions{
+
+            display:flex;
+            gap:15px;
+
+            flex-wrap:wrap;
+        }
+
+        .filter-actions select{
+
+            padding:15px 18px;
+
+            border:none;
+
+            outline:none;
+
+            border-radius:16px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color:white;
+
+            min-width:170px;
+        }
+
+        .filter-actions option{
+            color:black;
+        }
+
+        /* PROPERTY GRID */
+
+        .listing-container{
+
+            width:min(1400px,92%);
+            margin:30px auto 80px;
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(330px,1fr));
+
+            gap:28px;
+        }
+
+        .property-card{
+
+            background:var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:30px;
+
+            overflow:hidden;
+
+            backdrop-filter:blur(14px);
+
+            transition:0.28s ease;
+
+            box-shadow:var(--shadow);
+
+            position:relative;
+        }
+
+        .property-card:hover{
+
+            transform:
+                translateY(-8px);
+
+            background:
+                rgba(255,255,255,0.11);
+        }
+
+        /* IMAGE */
+
+        .image-wrapper{
+
+            position:relative;
+        }
+
+        .property-card img{
+
+            width:100%;
+
+            height:260px;
+
+            object-fit:cover;
+        }
+
+        .property-badge{
+
+            position:absolute;
+
+            top:18px;
+            left:18px;
+
+            background:
+                rgba(15,23,42,0.8);
+
+            backdrop-filter:blur(10px);
+
+            padding:10px 16px;
+
+            border-radius:16px;
+
+            font-size:0.9rem;
+
+            font-weight:700;
+
+            color:#38bdf8;
+        }
+
+        .favorite-btn{
+
+            position:absolute;
+
+            top:18px;
+            right:18px;
+
+            width:45px;
+            height:45px;
+
+            border:none;
+
+            border-radius:50%;
+
+            cursor:pointer;
+
+            background:
+                rgba(15,23,42,0.7);
+
+            color:white;
+
+            font-size:1rem;
+
+            backdrop-filter:blur(8px);
+
+            transition:0.25s ease;
+        }
+
+        .favorite-btn:hover{
+
+            background:#ef4444;
+
+            transform:scale(1.08);
+        }
+
+        /* CONTENT */
+
+        .property-content{
+
+            padding:28px;
+        }
+
+        .property-top{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:flex-start;
+
+            gap:10px;
+
+            margin-bottom:12px;
+        }
+
+        .property-top h3{
+
+            font-size:1.5rem;
+
+            line-height:1.2;
+        }
+
+        .rating{
+
+            background:
+                rgba(255,255,255,0.08);
+
+            padding:8px 12px;
+
+            border-radius:14px;
+
+            font-size:0.9rem;
+
+            display:flex;
+            align-items:center;
+
+            gap:6px;
+
+            color:#facc15;
+        }
+
+        .location{
+
+            display:flex;
+            align-items:center;
+
+            gap:8px;
+
+            color:#94a3b8;
+
+            margin-bottom:18px;
+        }
+
+        .property-content p{
+
+            color:var(--muted);
+
+            line-height:1.8;
+
+            margin-bottom:22px;
+        }
+
+        /* FEATURES */
+
+        .property-features{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(3,1fr);
+
+            gap:12px;
+
+            margin-bottom:25px;
+        }
+
+        .feature{
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:18px;
+
+            padding:14px 10px;
+
+            text-align:center;
+        }
+
+        .feature i{
+
+            color:#60a5fa;
+
+            margin-bottom:10px;
+
+            display:block;
+        }
+
+        .feature span{
+
+            color:#cbd5e1;
+
+            font-size:0.9rem;
+        }
+
+        /* PRICE */
+
+        .bottom-section{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            gap:15px;
+        }
+
+        .price h2{
+
+            font-size:2rem;
+        }
+
+        .price span{
+
+            color:#94a3b8;
+        }
+
+        /* BUTTON */
+
+        .book-btn{
+
+            border:none;
+
+            padding:16px 24px;
+
+            border-radius:18px;
+
+            background:var(--primary);
+
+            color:white;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:0.25s ease;
+
+            display:flex;
+            align-items:center;
+
+            gap:10px;
+        }
+
+        .book-btn:hover{
+
+            background:var(--primary-hover);
+
+            transform:translateY(-2px);
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.35);
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            padding:28px;
+
+            text-align:center;
+
+            color:#94a3b8;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:768px){
+
+            .hero h1{
+                font-size:2.8rem;
             }
+
+            .nav-wrapper{
+
+                flex-direction:column;
+
+                gap:18px;
+            }
+
+            .filters{
+
+                flex-direction:column;
+            }
+
+            .property-features{
+
+                grid-template-columns:1fr;
+            }
+
+            .bottom-section{
+
+                flex-direction:column;
+                align-items:flex-start;
+            }
+
+            .book-btn{
+                width:100%;
+                justify-content:center;
+            }
+
         }
+
     </style>
+
 </head>
+
 <body>
 
-    <!-- Header Section (Navigation Bar) -->
-    <div class="header">
-        <h1>Kaliakair Rental Solution</h1>
-        <nav>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="profile.html">Profile</a>
-            <a href="login.html">Logout</a>
-        </nav>
+    <!-- BACKGROUND -->
+
+    <div class="background">
+
+        <div class="blur blur-1"></div>
+
+        <div class="blur blur-2"></div>
+
     </div>
 
-    <!-- Main Content (Property Listings) -->
-    <div class="listing-container" id="listingContainer">
-        <!-- Properties will be loaded here dynamically -->
+    <!-- NAVBAR -->
+
+    <nav class="navbar">
+
+        <div class="nav-wrapper">
+
+            <div class="logo">
+                Kaliakair<span>Rental</span>
+            </div>
+
+            <div class="nav-links">
+
+                <a href="dashboard.html">
+                    Dashboard
+                </a>
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="contact-admin.html">
+                    Contact
+                </a>
+
+                <a
+                    href="login.html"
+                    id="logoutBtn"
+                >
+                    Logout
+                </a>
+
+            </div>
+
+        </div>
+
+    </nav>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <h1>
+            Explore Premium
+            <span>Properties</span>
+        </h1>
+
+        <p>
+            Browse modern apartments,
+            luxury villas,
+            and premium family homes
+            with a seamless booking experience.
+        </p>
+
+    </section>
+
+    <!-- FILTERS -->
+
+    <div class="filters">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+            <i class="fa-solid fa-magnifying-glass"></i>
+
+            <input
+                type="text"
+                id="searchInput"
+                placeholder="Search properties..."
+            >
+
+        </div>
+
+        <!-- FILTERS -->
+
+        <div class="filter-actions">
+
+            <select id="priceFilter">
+
+                <option value="all">
+                    All Prices
+                </option>
+
+                <option value="5000">
+                    Under ৳5,000
+                </option>
+
+                <option value="10000">
+                    Under ৳10,000
+                </option>
+
+                <option value="20000">
+                    Under ৳20,000
+                </option>
+
+            </select>
+
+        </div>
+
     </div>
+
+    <!-- PROPERTY GRID -->
+
+    <div
+        class="listing-container"
+        id="listingContainer"
+    ></div>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2024 Kaliakair Rental Solution.
+        Designed with modern premium UI.
+
+    </footer>
 
     <script>
-        // Example property data with unique image for each property (In real-world scenarios, this data would come from a database)
+
+        // BACKEND URL
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+        // JWT TOKEN
+
+        const token =
+            localStorage.getItem(
+                "access_token"
+            );
+
+        // LOGIN CHECK
+
+        if(!token){
+
+            alert("Please login first.");
+
+            window.location.href =
+                "login.html";
+        }
+
+        // PROPERTIES
+
         const properties = [
+
             {
-                id: 1,
-                name: "Saikat Apartment",
-                image: "images/saikat-apartment.jpg",  // Unique image for this property
-                bedrooms: 2,
-                bathrooms: 1,
-                price: 4000,
-                description: "A saikat apartment perfect for small families or singles."
+                id:1,
+                name:"Saikat Apartment",
+                image:"images/saikat-apartment.jpg",
+                bedrooms:2,
+                bathrooms:1,
+                location:"Kaliakair, Gazipur",
+                price:4000,
+                rating:"4.8",
+                type:"Apartment",
+                description:
+                    "Modern apartment with spacious rooms and premium comfort."
             },
+
             {
-                id: 2,
-                name: "Fahim Villa",
-                image: "images/fahim-villa.webp",  // Unique image for this property
-                bedrooms: 4,
-                bathrooms: 3,
-                price: 9000,
-                description: "A fahim villa with a spacious layout and premium amenities."
+                id:2,
+                name:"Fahim Villa",
+                image:"images/fahim-villa.webp",
+                bedrooms:4,
+                bathrooms:3,
+                location:"Kaliakair, Gazipur",
+                price:9000,
+                rating:"4.9",
+                type:"Villa",
+                description:
+                    "Luxury villa with elegant architecture and family-friendly environment."
             },
+
             {
-                id: 3,
-                name: "Kowsar Studio",
-                image: "images/kowsar-studio.jpg",  // Unique image for this property
-                bedrooms: 1,
-                bathrooms: 1,
-                price: 15000,
-                description: "A kowsar modern studio for city living."
+                id:3,
+                name:"Kowsar Studio",
+                image:"images/kowsar-studio.jpg",
+                bedrooms:1,
+                bathrooms:1,
+                location:"Kaliakair, Gazipur",
+                price:15000,
+                rating:"4.7",
+                type:"Studio",
+                description:
+                    "Modern city studio apartment with stylish interior design."
             },
+
             {
-                id: 4,
-                name: "AL Amin Apartment",
-                image: "images/al-amin-apartment.webp",  // Add the image path for AL Amin Apartment
-                bedrooms: 3,
-                bathrooms: 2,
-                price: 6000,
-                description: "A spacious 3-bedroom apartment with modern amenities, ideal for families looking for comfort and convenience."
+                id:4,
+                name:"AL Amin Apartment",
+                image:"images/al-amin-apartment.webp",
+                bedrooms:3,
+                bathrooms:2,
+                location:"Kaliakair, Gazipur",
+                price:6000,
+                rating:"4.6",
+                type:"Apartment",
+                description:
+                    "Spacious apartment ideal for large families and long-term living."
             }
+
         ];
 
-        // Function to render properties dynamically
-        function renderProperties() {
-            const container = document.getElementById('listingContainer');
-            container.innerHTML = ''; // Clear the container before rendering
+        // RENDER
 
-            properties.forEach(property => {
-                const card = document.createElement('div');
-                card.classList.add('property-card');
+        function renderProperties(filtered){
+
+            const container =
+                document.getElementById(
+                    "listingContainer"
+                );
+
+            container.innerHTML = "";
+
+            filtered.forEach(property => {
+
+                const card =
+                    document.createElement("div");
+
+                card.classList.add(
+                    "property-card"
+                );
 
                 card.innerHTML = `
-                    <img src="${property.image}" alt="${property.name}">
-                    <h3>${property.name}</h3>
-                    <p>${property.bedrooms} Beds | ${property.bathrooms} Baths | ৳${property.price}/month</p>
-                    <p>${property.description}</p>
-                    <a href="property-details.html?id=${property.id}">View Details</a>
+
+                    <div class="image-wrapper">
+
+                        <img
+                            src="${property.image}"
+                            alt="${property.name}"
+                        >
+
+                        <div class="property-badge">
+                            ${property.type}
+                        </div>
+
+                        <button class="favorite-btn">
+                            <i class="fa-regular fa-heart"></i>
+                        </button>
+
+                    </div>
+
+                    <div class="property-content">
+
+                        <div class="property-top">
+
+                            <h3>
+                                ${property.name}
+                            </h3>
+
+                            <div class="rating">
+
+                                <i class="fa-solid fa-star"></i>
+
+                                ${property.rating}
+
+                            </div>
+
+                        </div>
+
+                        <div class="location">
+
+                            <i class="fa-solid fa-location-dot"></i>
+
+                            ${property.location}
+
+                        </div>
+
+                        <p>
+                            ${property.description}
+                        </p>
+
+                        <div class="property-features">
+
+                            <div class="feature">
+
+                                <i class="fa-solid fa-bed"></i>
+
+                                <span>
+                                    ${property.bedrooms} Beds
+                                </span>
+
+                            </div>
+
+                            <div class="feature">
+
+                                <i class="fa-solid fa-bath"></i>
+
+                                <span>
+                                    ${property.bathrooms} Baths
+                                </span>
+
+                            </div>
+
+                            <div class="feature">
+
+                                <i class="fa-solid fa-wifi"></i>
+
+                                <span>
+                                    WiFi
+                                </span>
+
+                            </div>
+
+                        </div>
+
+                        <div class="bottom-section">
+
+                            <div class="price">
+
+                                <h2>
+                                    ৳${property.price}
+                                </h2>
+
+                                <span>
+                                    Per Month
+                                </span>
+
+                            </div>
+
+                            <button
+                                class="book-btn"
+                                onclick="bookProperty('${property.name}')"
+                            >
+
+                                <i class="fa-solid fa-calendar-check"></i>
+
+                                Book Now
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
                 `;
 
                 container.appendChild(card);
+
             });
+
         }
 
-        // Call renderProperties when the page loads
-        window.onload = renderProperties;
+        // FILTER
+
+        function filterProperties(){
+
+            const search =
+                document
+                .getElementById("searchInput")
+                .value
+                .toLowerCase();
+
+            const priceFilter =
+                document
+                .getElementById("priceFilter")
+                .value;
+
+            let filtered =
+                properties.filter(property => {
+
+                    const matchSearch =
+                        property.name
+                        .toLowerCase()
+                        .includes(search);
+
+                    let matchPrice = true;
+
+                    if(priceFilter !== "all"){
+
+                        matchPrice =
+                            property.price <=
+                            Number(priceFilter);
+                    }
+
+                    return (
+                        matchSearch &&
+                        matchPrice
+                    );
+
+                });
+
+            renderProperties(filtered);
+
+        }
+
+        // SEARCH EVENTS
+
+        document
+            .getElementById("searchInput")
+            .addEventListener(
+                "input",
+                filterProperties
+            );
+
+        document
+            .getElementById("priceFilter")
+            .addEventListener(
+                "change",
+                filterProperties
+            );
+
+        // BOOK PROPERTY
+
+        async function bookProperty(propertyName){
+
+            try{
+
+                const response =
+                    await fetch(
+                        `${API_URL}/todos/todo`,
+                        {
+
+                            method:"POST",
+
+                            headers:{
+                                "Content-Type":
+                                    "application/json",
+
+                                "Authorization":
+                                    `Bearer ${token}`
+                            },
+
+                            body:JSON.stringify({
+
+                                title:propertyName,
+
+                                description:
+                                    `Booking request for ${propertyName}`,
+
+                                priority:3,
+
+                                complete:false
+                            })
+
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                if(response.ok){
+
+                    alert(
+                        `${propertyName} booked successfully!`
+                    );
+
+                }else{
+
+                    alert(
+                        data.detail ||
+                        "Booking failed."
+                    );
+                }
+
+            }catch(error){
+
+                console.error(error);
+
+                alert(
+                    "Cannot connect to Flask backend."
+                );
+
+            }
+
+        }
+
+        // LOGOUT
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener(
+                "click",
+
+                function(){
+
+                    localStorage.removeItem(
+                        "access_token"
+                    );
+
+                }
+            );
+
+        // INITIAL RENDER
+
+        renderProperties(properties);
+
     </script>
 
 </body>

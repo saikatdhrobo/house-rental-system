@@ -1,203 +1,1065 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard - Kaliakair Rental Solution</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Dashboard • Kaliakair Rental
+    </title>
+
+    <!-- GOOGLE FONT -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #00c6ff, #0072ff); /* Bold gradient background */
-            color: #fff;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        * {
-            box-sizing: border-box;
+        :root{
+
+            --bg:#0f172a;
+
+            --card:
+                rgba(255,255,255,0.08);
+
+            --border:
+                rgba(255,255,255,0.12);
+
+            --text:#f8fafc;
+
+            --muted:#cbd5e1;
+
+            --primary:#2563eb;
+
+            --primary-hover:#1d4ed8;
+
+            --shadow:
+                0 10px 35px rgba(0,0,0,0.35);
         }
 
-        /* Header (Navigation Bar) */
-        .header {
-            background-color: linear-gradient(to right, #00c6ff, #0072ff); /* Bold gradient background */
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        body{
+
+            font-family:'Inter',sans-serif;
+
+            min-height:100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(37,99,235,0.22),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(56,189,248,0.18),
+                    transparent 30%
+                ),
+
+                var(--bg);
+
+            color:var(--text);
+
+            overflow-x:hidden;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 2rem;
+        /* NAVBAR */
+
+        .navbar{
+
+            position:sticky;
+            top:0;
+
+            z-index:999;
+
+            backdrop-filter:blur(16px);
+
+            background:
+                rgba(15,23,42,0.75);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            padding:18px 6%;
         }
 
-        .header nav {
-            display: flex;
+        .nav-wrapper{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
 
-        .header nav a {
-            color: white;
-            margin-left: 25px;
-            font-size: 1.1rem;
-            padding: 10px;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+        .logo{
+
+            font-size:1.5rem;
+            font-weight:800;
+
+            letter-spacing:-1px;
         }
 
-        .header nav a:hover {
-            background-color: #0056b3;
-            transform: scale(1.1); /* Slight scale effect on hover */
+        .logo span{
+            color:#38bdf8;
         }
 
-        /* Main Content */
-        .main-content {
-            padding: 50px;
-            flex-grow: 1;
-            background-color: rgba(255, 255, 255, 0.9); /* Light, semi-transparent white */
-            margin-top: 30px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-            border-radius: 10px;
-            text-align: center;
-            animation: fadeIn 1s ease-out; /* Add a fade-in effect */
+        .nav-links{
+
+            display:flex;
+            align-items:center;
+            gap:15px;
         }
 
-        .main-content h2 {
-            font-size: 2.5rem;
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: bold;
+        .nav-links a{
+
+            text-decoration:none;
+
+            color:var(--muted);
+
+            padding:10px 16px;
+
+            border-radius:12px;
+
+            font-weight:500;
+
+            transition:0.25s ease;
         }
 
-        /* Overview Section */
-        .overview {
-            display: flex;
-            justify-content: space-between;
-            gap: 30px;
-            margin-bottom: 40px;
-            transition: all 0.3s ease;
+        .nav-links a:hover{
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color:white;
         }
 
-        .overview .card {
-            background-color: #fff;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            border-radius: 12px;
-            padding: 30px;
-            width: 30%;
-            text-align: center;
-            cursor: pointer;
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+        /* MAIN */
+
+        .dashboard{
+
+            width:min(1400px,92%);
+            margin:auto;
+
+            padding:50px 0 70px;
         }
 
-        .overview .card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
-            background-color: #f8f9fa; /* Light background change on hover */
+        /* HERO */
+
+        .hero{
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37,99,235,0.25),
+                    rgba(56,189,248,0.08)
+                );
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:32px;
+
+            padding:50px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            gap:40px;
+
+            margin-bottom:35px;
+
+            overflow:hidden;
+
+            position:relative;
         }
 
-        .overview .card h3 {
-            margin-bottom: 15px;
-            font-size: 1.8rem;
-            color: #007bff;
-            font-weight: bold;
+        .hero::before{
+
+            content:"";
+
+            position:absolute;
+
+            width:400px;
+            height:400px;
+
+            background:
+                rgba(59,130,246,0.18);
+
+            border-radius:50%;
+
+            top:-150px;
+            right:-120px;
+
+            filter:blur(40px);
         }
 
-        .overview .card p {
-            font-size: 1.1rem;
-            color: #777;
+        .hero-left{
+
+            position:relative;
+            z-index:2;
         }
 
-        /* Footer Section */
-        .footer {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #777;
-            padding: 20px 0;
-            background-color: #222222;
-            border-top: 1px solid #ddd;
+        .hero-left h1{
+
+            font-size:3.2rem;
+
+            line-height:1.05;
+
+            margin-bottom:18px;
+
+            letter-spacing:-2px;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(30px);
+        .hero-left p{
+
+            color:var(--muted);
+
+            line-height:1.8;
+
+            max-width:620px;
+
+            font-size:1.05rem;
+        }
+
+        .hero-right{
+
+            position:relative;
+            z-index:2;
+        }
+
+        .profile-badge{
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            padding:25px;
+
+            border-radius:24px;
+
+            text-align:center;
+
+            min-width:250px;
+
+            backdrop-filter:blur(12px);
+        }
+
+        .avatar{
+
+            width:90px;
+            height:90px;
+
+            border-radius:50%;
+
+            margin:auto auto 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:2rem;
+            font-weight:700;
+        }
+
+        .profile-badge h3{
+            margin-bottom:8px;
+        }
+
+        .profile-badge p{
+            color:var(--muted);
+        }
+
+        /* STATS */
+
+        .stats-grid{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(240px,1fr));
+
+            gap:24px;
+
+            margin-bottom:40px;
+        }
+
+        .stat-card{
+
+            background:var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:24px;
+
+            padding:28px;
+
+            backdrop-filter:blur(12px);
+
+            transition:0.25s ease;
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .stat-card:hover{
+
+            transform:translateY(-5px);
+
+            background:
+                rgba(255,255,255,0.1);
+        }
+
+        .stat-icon{
+
+            width:60px;
+            height:60px;
+
+            border-radius:18px;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            margin-bottom:22px;
+
+            font-size:1.4rem;
+
+            background:
+                rgba(37,99,235,0.18);
+
+            color:#60a5fa;
+        }
+
+        .stat-card h4{
+
+            color:var(--muted);
+
+            font-size:1rem;
+
+            margin-bottom:10px;
+        }
+
+        .stat-card p{
+
+            font-size:2.2rem;
+
+            font-weight:800;
+        }
+
+        /* ACTION CARDS */
+
+        .section-title{
+
+            margin-bottom:22px;
+
+            font-size:1.7rem;
+
+            letter-spacing:-1px;
+        }
+
+        .actions-grid{
+
+            display:grid;
+
+            grid-template-columns:
+                repeat(auto-fit,minmax(280px,1fr));
+
+            gap:25px;
+        }
+
+        .action-card{
+
+            background:var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:28px;
+
+            padding:30px;
+
+            text-decoration:none;
+
+            color:white;
+
+            transition:0.25s ease;
+
+            position:relative;
+
+            overflow:hidden;
+        }
+
+        .action-card:hover{
+
+            transform:translateY(-6px);
+
+            background:
+                rgba(255,255,255,0.1);
+        }
+
+        .action-icon{
+
+            width:70px;
+            height:70px;
+
+            border-radius:22px;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:1.6rem;
+
+            margin-bottom:24px;
+
+            background:
+                rgba(37,99,235,0.18);
+
+            color:#60a5fa;
+        }
+
+        .action-card h3{
+
+            margin-bottom:12px;
+
+            font-size:1.4rem;
+        }
+
+        .action-card p{
+
+            color:var(--muted);
+
+            line-height:1.7;
+        }
+
+        /* ACTIVITY */
+
+        .activity-section{
+
+            margin-top:45px;
+
+            display:grid;
+
+            grid-template-columns:1fr 1fr;
+
+            gap:25px;
+        }
+
+        .activity-card{
+
+            background:var(--card);
+
+            border:
+                1px solid var(--border);
+
+            border-radius:28px;
+
+            padding:30px;
+
+            backdrop-filter:blur(12px);
+        }
+
+        .activity-card h3{
+
+            margin-bottom:20px;
+
+            font-size:1.4rem;
+        }
+
+        .activity-item{
+
+            display:flex;
+            align-items:center;
+
+            gap:15px;
+
+            padding:16px 0;
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+        }
+
+        .activity-item:last-child{
+            border-bottom:none;
+        }
+
+        .activity-circle{
+
+            width:14px;
+            height:14px;
+
+            border-radius:50%;
+
+            background:#38bdf8;
+        }
+
+        .activity-item p{
+
+            color:var(--muted);
+
+            line-height:1.6;
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            margin-top:70px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            padding:30px 6%;
+
+            text-align:center;
+
+            color:#94a3b8;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:1100px){
+
+            .hero{
+
+                flex-direction:column;
+                align-items:flex-start;
             }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .overview {
-                flex-direction: column;
-                align-items: center;
+            .activity-section{
+                grid-template-columns:1fr;
             }
 
-            .overview .card {
-                width: 90%;
-                margin-bottom: 20px;
-            }
         }
+
+        @media(max-width:768px){
+
+            .nav-wrapper{
+
+                flex-direction:column;
+
+                gap:18px;
+            }
+
+            .hero{
+                padding:35px;
+            }
+
+            .hero-left h1{
+                font-size:2.4rem;
+            }
+
+            .profile-badge{
+                width:100%;
+            }
+
+        }
+
     </style>
+
 </head>
+
 <body>
 
-    <!-- Header Section (Top Navigation Bar) -->
-    <div class="header">
-        <h1>Kaliakair Rental Solution</h1>
-        <nav>
-            <a href="profile.html">Profile</a>
-            <!-- New Contact Option -->
-            <a href="contact-admin.html">Contact</a>
-            <a href="login.html">Logout</a>
-        </nav>
-    </div>
+    <!-- NAVBAR -->
 
-    <!-- Main Content (Dashboard) -->
-    <div class="main-content">
-        <h2>Welcome, <span id="user-name">Kowsar Islam</span>!</h2>
+    <nav class="navbar">
 
-        <!-- Overview Section -->
-        <div class="overview">
-            <!-- Booked Properties Card -->
-            <a href="booked-properties.html" class="card">
-                <h3>Booked Properties</h3>
-                <p>View and manage your current bookings</p>
-            </a>
-            <!-- Property Listings Card -->
-            <a href="listings.html" class="card">
-                <h3>Property Listings</h3>
-                <p>Browse available properties for rent</p>
-            </a>
-            <!-- Your Profile Card -->
-            <a href="profile.html" class="card">
-                <h3>Your Profile</h3>
-                <p>View and edit your account details</p>
-            </a>
+        <div class="nav-wrapper">
+
+            <div class="logo">
+                Kaliakair<span>Rental</span>
+            </div>
+
+            <div class="nav-links">
+
+                <a href="profile.html">
+                    Profile
+                </a>
+
+                <a href="contact.html">
+                    Contact
+                </a>
+
+                <a href="listings.html">
+                    Listings
+                </a>
+
+                <a href="#" id="logoutBtn">
+                    Logout
+                </a>
+
+            </div>
+
         </div>
-    </div>
 
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>&copy; 2024 Kaliakair Rental Solution. All Rights Reserved.</p>
-    </div>
+    </nav>
+
+    <!-- DASHBOARD -->
+
+    <main class="dashboard">
+
+        <!-- HERO -->
+
+        <section class="hero">
+
+            <div class="hero-left">
+
+                <h1>
+                    Welcome Back,
+                    <span id="user-name">
+                        Loading...
+                    </span>
+                </h1>
+
+                <p>
+                    Manage your rental activities,
+                    track bookings,
+                    explore premium properties,
+                    and stay connected with
+                    Kaliakair Rental Solution.
+                </p>
+
+            </div>
+
+            <div class="hero-right">
+
+                <div class="profile-badge">
+
+                    <div class="avatar">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+
+                    <h3 id="profileName">
+                        User
+                    </h3>
+
+                    <p>
+                        Premium Member
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- STATS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-house"></i>
+                </div>
+
+                <h4>Total Bookings</h4>
+
+                <p id="bookingCount">
+                    0
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-clock"></i>
+                </div>
+
+                <h4>Pending Tasks</h4>
+
+                <p id="pendingCount">
+                    0
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <h4>Completed Tasks</h4>
+
+                <p id="completedCount">
+                    0
+                </p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <h4>User Rating</h4>
+
+                <p>
+                    4.9
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- ACTIONS -->
+
+        <h2 class="section-title">
+            Quick Actions
+        </h2>
+
+        <section class="actions-grid">
+
+            <a href="booking.html" class="action-card">
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-calendar-check"></i>
+                </div>
+
+                <h3>
+                    Booked Properties
+                </h3>
+
+                <p>
+                    View and manage your
+                    current property bookings
+                    and reservations.
+                </p>
+
+            </a>
+
+            <a href="listings.html" class="action-card">
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-building"></i>
+                </div>
+
+                <h3>
+                    Property Listings
+                </h3>
+
+                <p>
+                    Explore premium apartments,
+                    villas, and studios available
+                    for rent.
+                </p>
+
+            </a>
+
+            <a href="profile.html" class="action-card">
+
+                <div class="action-icon">
+                    <i class="fa-solid fa-user-gear"></i>
+                </div>
+
+                <h3>
+                    Your Profile
+                </h3>
+
+                <p>
+                    Update your personal details,
+                    account settings,
+                    and security options.
+                </p>
+
+            </a>
+
+        </section>
+
+        <!-- ACTIVITY -->
+
+        <section class="activity-section">
+
+            <div class="activity-card">
+
+                <h3>
+                    Recent Activity
+                </h3>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        Successfully connected to
+                        Flask backend system.
+                    </p>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        Dashboard analytics updated.
+                    </p>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        JWT authentication verified.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="activity-card">
+
+                <h3>
+                    Platform Features
+                </h3>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        Modern responsive design
+                        optimized for all devices.
+                    </p>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        Secure booking system with
+                        Flask backend integration.
+                    </p>
+
+                </div>
+
+                <div class="activity-item">
+
+                    <div class="activity-circle"></div>
+
+                    <p>
+                        Fast and premium property
+                        browsing experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        © 2024 Kaliakair Rental Solution.
+        Designed for premium rental experiences.
+
+    </footer>
 
     <script>
-        // Dynamic User Name (to be replaced with actual user data)
-        const userName = "Kowsar Islam"; // Dynamic user name
-        document.getElementById('user-name').textContent = userName;
+
+        // BACKEND URL
+
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+        // JWT TOKEN
+
+        const token =
+            localStorage.getItem(
+                "access_token"
+            );
+
+        // LOGIN CHECK
+
+        if(!token){
+
+            window.location.href =
+                "login.html";
+        }
+
+        // FETCH USER PROFILE
+
+        async function fetchUserProfile(){
+
+            try{
+
+                const response =
+                    await fetch(
+                        `${API_URL}/user/`,
+                        {
+
+                            method:"GET",
+
+                            headers:{
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                if(response.ok){
+
+                    const fullName =
+                        `${data.first_name} ${data.last_name}`;
+
+                    document
+                        .getElementById("user-name")
+                        .innerText = fullName;
+
+                    document
+                        .getElementById("profileName")
+                        .innerText = fullName;
+
+                }else{
+
+                    document
+                        .getElementById("user-name")
+                        .innerText = "User";
+                }
+
+            }catch(error){
+
+                console.error(error);
+
+                document
+                    .getElementById("user-name")
+                    .innerText = "User";
+            }
+
+        }
+
+        // FETCH TODOS / BOOKINGS
+
+        async function fetchTodos(){
+
+            try{
+
+                const response =
+                    await fetch(
+                        `${API_URL}/todos/`,
+                        {
+
+                            method:"GET",
+
+                            headers:{
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+                        }
+                    );
+
+                const todos =
+                    await response.json();
+
+                if(response.ok){
+
+                    document
+                        .getElementById("bookingCount")
+                        .innerText = todos.length;
+
+                    const completed =
+                        todos.filter(
+                            todo => todo.complete
+                        ).length;
+
+                    const pending =
+                        todos.filter(
+                            todo => !todo.complete
+                        ).length;
+
+                    document
+                        .getElementById("completedCount")
+                        .innerText = completed;
+
+                    document
+                        .getElementById("pendingCount")
+                        .innerText = pending;
+                }
+
+            }catch(error){
+
+                console.error(error);
+            }
+
+        }
+
+        // LOGOUT
+
+        document
+            .getElementById("logoutBtn")
+            .addEventListener("click", () => {
+
+                localStorage.removeItem(
+                    "access_token"
+                );
+
+                window.location.href =
+                    "login.html";
+            });
+
+        // INIT
+
+        fetchUserProfile();
+
+        fetchTodos();
+
     </script>
 
 </body>

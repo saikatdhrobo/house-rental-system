@@ -1,245 +1,1198 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Profile - Kaliakair Rental Solution</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        My Profile • Kaliakair Rental
+    </title>
+
+    <!-- GOOGLE FONT -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- FONT AWESOME -->
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
+
     <style>
-        /* Global Styles */
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #00c6ff, #0072ff); /* Bold gradient background */
-            color: #333;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            min-height: 100vh;
-            padding: 20px;
-            overflow-x: hidden;
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
         }
 
-        * {
-            box-sizing: border-box;
+        :root{
+
+            --bg:#0f172a;
+
+            --card:
+                rgba(255,255,255,0.08);
+
+            --border:
+                rgba(255,255,255,0.12);
+
+            --text:#f8fafc;
+
+            --muted:#cbd5e1;
+
+            --primary:#2563eb;
+
+            --primary-hover:#1d4ed8;
+
+            --success:#22c55e;
+
+            --danger:#ef4444;
+
+            --shadow:
+                0 10px 35px rgba(0,0,0,0.35);
         }
 
-        /* Header Section */
-        .header {
-            background-color: #007bff;
-            color: white;
-            padding: 20px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 1.3rem;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        body{
+
+            font-family:'Inter',sans-serif;
+
+            min-height:100vh;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(37,99,235,0.22),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(14,165,233,0.18),
+                    transparent 30%
+                ),
+
+                var(--bg);
+
+            color:var(--text);
+
+            overflow-x:hidden;
         }
 
-        .header h1 {
-            margin: 0;
-            font-size: 2rem;
+        /* BACKGROUND */
+
+        .blur{
+
+            position:fixed;
+
+            border-radius:50%;
+
+            filter:blur(90px);
+
+            z-index:0;
         }
 
-        .header nav {
-            display: flex;
+        .blur-1{
+
+            width:320px;
+            height:320px;
+
+            background:
+                rgba(37,99,235,0.22);
+
+            top:-100px;
+            left:-100px;
         }
 
-        .header nav a {
-            color: white;
-            margin-left: 25px;
-            font-size: 1.1rem;
-            padding: 10px;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s, transform 0.3s;
+        .blur-2{
+
+            width:280px;
+            height:280px;
+
+            background:
+                rgba(14,165,233,0.18);
+
+            bottom:-100px;
+            right:-100px;
         }
 
-        .header nav a:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+        /* HEADER */
+
+        .header{
+
+            position:sticky;
+
+            top:0;
+
+            z-index:100;
+
+            backdrop-filter:blur(16px);
+
+            background:
+                rgba(15,23,42,0.75);
+
+            border-bottom:
+                1px solid rgba(255,255,255,0.08);
+
+            padding:20px 50px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
 
-        /* Profile Section */
-        .profile-container {
-            max-width: 600px;
-            margin: 50px auto;
-            padding: 30px;
-            background-color: white;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+        .logo{
+
+            font-size:1.7rem;
+
+            font-weight:800;
+
+            letter-spacing:-1px;
         }
 
-        .profile-info h2 {
-            color: #007bff;
-            font-size: 2rem;
-            margin-bottom: 20px;
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
+        .logo span{
+            color:#38bdf8;
         }
 
-        .profile-info p {
-            font-size: 1.1rem;
-            color: #777;
-            margin-bottom: 20px;
-            text-align: center;
-            opacity: 0;
-            animation: fadeIn 1.5s ease-in-out forwards;
+        .nav-links{
+
+            display:flex;
+            align-items:center;
+            gap:15px;
         }
 
-        .profile-info label {
-            font-size: 1.1rem;
-            color: #333;
-            display: block;
-            margin-bottom: 5px;
+        .nav-links a{
+
+            text-decoration:none;
+
+            color:#e2e8f0;
+
+            padding:12px 18px;
+
+            border-radius:14px;
+
+            transition:0.25s ease;
+
+            font-weight:600;
         }
 
-        .profile-info input {
-            width: 100%;
-            padding: 15px;
-            margin-bottom: 20px;
-            border: 1px solid #ccc;
-            border-radius: 8px;
-            font-size: 1rem;
-            color: #333;
-            transition: border-color 0.3s;
+        .nav-links a:hover{
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color:white;
         }
 
-        .profile-info input:focus {
-            border-color: #0072ff;
-            outline: none;
+        .logout-btn{
+
+            background:
+                rgba(239,68,68,0.15);
+
+            color:#fca5a5 !important;
         }
 
-        /* Disabled Input Styling */
-        .profile-info input[disabled] {
-            background-color: #f7f7f7;
-            color: #aaa;
-            cursor: not-allowed;
+        .logout-btn:hover{
+
+            background:
+                rgba(239,68,68,0.25);
         }
 
-        .profile-info button {
-            width: 100%;
-            padding: 15px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.3s;
+        /* MAIN */
+
+        .main{
+
+            position:relative;
+
+            z-index:2;
+
+            width:100%;
+            max-width:1300px;
+
+            margin:auto;
+
+            padding:50px 25px;
         }
 
-        .profile-info button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
+        .top-section{
+
+            display:grid;
+            grid-template-columns:350px 1fr;
+
+            gap:30px;
         }
 
-        /* Footer Section */
-        .footer {
-            text-align: center;
-            font-size: 0.9rem;
-            color: #fff;
-            padding: 20px 0;
-            background-color: #333;
-            border-top: 1px solid #ddd;
-            margin-top: auto;
+        /* PROFILE CARD */
+
+        .profile-card{
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:30px;
+
+            padding:35px;
+
+            backdrop-filter:blur(16px);
+
+            box-shadow:var(--shadow);
+
+            height:fit-content;
         }
 
-        /* Animations */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
+        .profile-image{
+
+            width:120px;
+            height:120px;
+
+            margin:auto;
+
+            border-radius:50%;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            font-size:3rem;
+
+            font-weight:800;
+
+            margin-bottom:25px;
+
+            box-shadow:
+                0 10px 25px rgba(37,99,235,0.4);
+        }
+
+        .profile-card h2{
+
+            text-align:center;
+
+            margin-bottom:8px;
+
+            font-size:1.8rem;
+        }
+
+        .profile-card p{
+
+            text-align:center;
+
+            color:var(--muted);
+
+            margin-bottom:30px;
+        }
+
+        .profile-stats{
+
+            display:grid;
+
+            gap:15px;
+        }
+
+        .stat{
+
+            background:
+                rgba(255,255,255,0.05);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:18px;
+
+            padding:18px;
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .stat span{
+            color:var(--muted);
+        }
+
+        .stat strong{
+            font-size:1.2rem;
+        }
+
+        /* PROFILE FORM */
+
+        .profile-content{
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:30px;
+
+            padding:40px;
+
+            backdrop-filter:blur(16px);
+
+            box-shadow:var(--shadow);
+        }
+
+        .section-title{
+
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+
+            margin-bottom:35px;
+        }
+
+        .section-title h1{
+
+            font-size:2.5rem;
+
+            letter-spacing:-2px;
+        }
+
+        .section-title p{
+
+            color:var(--muted);
+
+            margin-top:8px;
+        }
+
+        .badge{
+
+            padding:10px 18px;
+
+            border-radius:50px;
+
+            background:
+                rgba(34,197,94,0.15);
+
+            color:#86efac;
+
+            font-weight:700;
+
+            border:
+                1px solid rgba(34,197,94,0.25);
+        }
+
+        /* FORM */
+
+        .form-grid{
+
+            display:grid;
+            grid-template-columns:1fr 1fr;
+
+            gap:22px;
+        }
+
+        .input-group{
+            margin-bottom:22px;
+        }
+
+        .input-group.full{
+            grid-column:1/-1;
+        }
+
+        .input-group label{
+
+            display:block;
+
+            margin-bottom:12px;
+
+            color:#cbd5e1;
+
+            font-weight:600;
+        }
+
+        .input-wrapper{
+            position:relative;
+        }
+
+        .input-wrapper i{
+
+            position:absolute;
+
+            top:50%;
+            left:18px;
+
+            transform:translateY(-50%);
+
+            color:#94a3b8;
+        }
+
+        .input-wrapper input{
+
+            width:100%;
+
+            border:none;
+
+            outline:none;
+
+            border-radius:18px;
+
+            padding:17px 18px 17px 52px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            color:white;
+
+            font-size:1rem;
+
+            transition:0.25s ease;
+        }
+
+        .input-wrapper input:focus{
+
+            border-color:#2563eb;
+
+            box-shadow:
+                0 0 0 4px rgba(37,99,235,0.15);
+        }
+
+        .input-wrapper input:disabled{
+
+            opacity:0.7;
+
+            cursor:not-allowed;
+        }
+
+        /* PASSWORD SECTION */
+
+        .password-box{
+
+            margin-top:15px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            border:
+                1px solid rgba(255,255,255,0.08);
+
+            border-radius:24px;
+
+            padding:30px;
+        }
+
+        .password-box h3{
+
+            margin-bottom:8px;
+        }
+
+        .password-box p{
+
+            color:var(--muted);
+
+            margin-bottom:28px;
+
+            line-height:1.7;
+        }
+
+        /* BUTTON */
+
+        .save-btn{
+
+            margin-top:15px;
+
+            width:100%;
+
+            border:none;
+
+            padding:18px;
+
+            border-radius:20px;
+
+            background:var(--primary);
+
+            color:white;
+
+            font-size:1rem;
+
+            font-weight:700;
+
+            cursor:pointer;
+
+            transition:0.25s ease;
+        }
+
+        .save-btn:hover{
+
+            background:var(--primary-hover);
+
+            transform:translateY(-2px);
+
+            box-shadow:
+                0 12px 30px rgba(37,99,235,0.35);
+        }
+
+        /* MESSAGE */
+
+        .message{
+
+            margin-top:20px;
+
+            padding:16px;
+
+            border-radius:18px;
+
+            font-weight:600;
+
+            display:none;
+
+            line-height:1.7;
+        }
+
+        .success{
+
+            display:block;
+
+            background:
+                rgba(34,197,94,0.15);
+
+            border:
+                1px solid rgba(34,197,94,0.25);
+
+            color:#86efac;
+        }
+
+        .error{
+
+            display:block;
+
+            background:
+                rgba(239,68,68,0.15);
+
+            border:
+                1px solid rgba(239,68,68,0.25);
+
+            color:#fca5a5;
+        }
+
+        /* FOOTER */
+
+        .footer{
+
+            text-align:center;
+
+            color:#94a3b8;
+
+            padding:30px 20px 40px;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width:980px){
+
+            .top-section{
+                grid-template-columns:1fr;
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+
+            .form-grid{
+                grid-template-columns:1fr;
             }
+
         }
 
-        /* Mobile Responsiveness */
-        @media (max-width: 768px) {
-            .profile-container {
-                width: 90%;
+        @media(max-width:768px){
+
+            .header{
+
+                padding:20px;
+
+                flex-direction:column;
+
+                gap:18px;
             }
 
-            .profile-info input {
-                padding: 12px;
+            .nav-links{
+
+                flex-wrap:wrap;
+                justify-content:center;
             }
 
-            .profile-info button {
-                padding: 12px;
+            .section-title{
+
+                flex-direction:column;
+                align-items:flex-start;
+
+                gap:15px;
             }
+
+            .section-title h1{
+                font-size:2rem;
+            }
+
+            .profile-content,
+            .profile-card{
+                padding:28px;
+            }
+
         }
 
     </style>
+
 </head>
+
 <body>
 
-    <!-- Header Section (Navigation Bar) -->
-    <div class="header">
-        <h1>Kaliakair Rental Solution</h1>
-        <nav>
-            <a href="dashboard.html">Dashboard</a>
-            <a href="login.html">Logout</a>
-        </nav>
-    </div>
+    <!-- BACKGROUND -->
 
-    <!-- Profile Section -->
-    <div class="profile-container">
-        <div class="profile-info">
-            <h2>Your Profile</h2>
-            <p>Manage your personal details and account settings below.</p>
+    <div class="blur blur-1"></div>
 
-            <!-- Full Name Input -->
-            <div>
-                <label for="name">Full Name</label>
-                <input type="text" id="name" placeholder="Enter your full name">
-            </div>
+    <div class="blur blur-2"></div>
 
-            <!-- Email Input (Non-editable) -->
-            <div>
-                <label for="email">Email Address</label>
-                <input type="email" id="email" placeholder="Enter your email address" disabled>
-            </div>
+    <!-- HEADER -->
 
-            <!-- Password Input -->
-            <div>
-                <label for="password">Change Password</label>
-                <input type="password" id="password" placeholder="Enter a new password">
-            </div>
+    <header class="header">
 
-            <!-- Save Changes Button -->
-            <button id="saveButton">Save Changes</button>
+        <div class="logo">
+            Kaliakair<span>Rental</span>
         </div>
-    </div>
 
-    <!-- Footer Section -->
-    <div class="footer">
-        <p>&copy; 2024 Kaliakair Rental Solution. All Rights Reserved.</p>
-    </div>
+        <nav class="nav-links">
+
+            <a href="dashboard.html">
+                Dashboard
+            </a>
+
+            <a href="listings.html">
+                Listings
+            </a>
+
+            <a href="contact.html">
+                Contact
+            </a>
+
+            <a
+                href="#"
+                id="logoutBtn"
+                class="logout-btn"
+            >
+                Logout
+            </a>
+
+        </nav>
+
+    </header>
+
+    <!-- MAIN -->
+
+    <main class="main">
+
+        <div class="top-section">
+
+            <!-- LEFT PROFILE CARD -->
+
+            <div class="profile-card">
+
+                <div
+                    class="profile-image"
+                    id="profileAvatar"
+                >
+                    U
+                </div>
+
+                <h2 id="profileName">
+                    Loading...
+                </h2>
+
+                <p>
+                    Premium Rental Member
+                </p>
+
+                <div class="profile-stats">
+
+                    <div class="stat">
+
+                        <span>
+                            Account Status
+                        </span>
+
+                        <strong>
+                            Active
+                        </strong>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <span>
+                            Security
+                        </span>
+
+                        <strong>
+                            Protected
+                        </strong>
+
+                    </div>
+
+                    <div class="stat">
+
+                        <span>
+                            Member Since
+                        </span>
+
+                        <strong>
+                            2024
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- RIGHT CONTENT -->
+
+            <div class="profile-content">
+
+                <div class="section-title">
+
+                    <div>
+
+                        <h1>
+                            My Profile
+                        </h1>
+
+                        <p>
+                            Manage your personal details
+                            and account security.
+                        </p>
+
+                    </div>
+
+                    <div class="badge">
+                        Verified Account
+                    </div>
+
+                </div>
+
+                <!-- PROFILE FORM -->
+
+                <div class="form-grid">
+
+                    <!-- FULL NAME -->
+
+                    <div class="input-group full">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-user"></i>
+
+                            <input
+                                type="text"
+                                id="name"
+                                placeholder="Loading..."
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group full">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <div class="input-wrapper">
+
+                            <i class="fa-solid fa-envelope"></i>
+
+                            <input
+                                type="email"
+                                id="email"
+                                disabled
+                            >
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- PASSWORD BOX -->
+
+                <div class="password-box">
+
+                    <h3>
+                        Change Password
+                    </h3>
+
+                    <p>
+                        Use a strong password with
+                        letters, numbers,
+                        and special characters.
+                    </p>
+
+                    <div class="form-grid">
+
+                        <!-- CURRENT PASSWORD -->
+
+                        <div class="input-group">
+
+                            <label>
+                                Current Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-lock"></i>
+
+                                <input
+                                    type="password"
+                                    id="currentPassword"
+                                    placeholder="Enter current password"
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <!-- NEW PASSWORD -->
+
+                        <div class="input-group">
+
+                            <label>
+                                New Password
+                            </label>
+
+                            <div class="input-wrapper">
+
+                                <i class="fa-solid fa-key"></i>
+
+                                <input
+                                    type="password"
+                                    id="newPassword"
+                                    placeholder="Enter new password"
+                                >
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                    <!-- BUTTON -->
+
+                    <button
+                        id="saveButton"
+                        class="save-btn"
+                    >
+                        Save Changes
+                    </button>
+
+                    <!-- MESSAGE -->
+
+                    <div
+                        id="message"
+                        class="message"
+                    ></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <p>
+            © 2024 Kaliakair Rental Solution.
+            All Rights Reserved.
+        </p>
+
+    </footer>
 
     <script>
-        // Simulate dynamic user profile data
-        const user = {
-            name: "MD Kowsar Islam",
-            email: "dhrobosaikat4@gmail.com"
-        };
 
-        // Populate form fields with dynamic data
-        document.getElementById('name').value = user.name;
-        document.getElementById('email').value = user.email;  // Email is displayed but not editable
+        // BACKEND URL
 
-        // Save changes functionality (mocked)
-        document.getElementById('saveButton').addEventListener('click', function() {
-            const updatedUser = {
-                name: document.getElementById('name').value,
-                email: document.getElementById('email').value, // This will be ignored since email is disabled
-                password: document.getElementById('password').value
-            };
-            alert(`Changes saved for ${updatedUser.name}`);
-        });
+        const API_URL =
+            "http://127.0.0.1:5000";
+
+        // TOKEN
+
+        const token =
+            localStorage.getItem(
+                "access_token"
+            );
+
+        // LOGIN CHECK
+
+        if(!token){
+
+            alert("Please login first.");
+
+            window.location.href =
+                "login.html";
+        }
+
+        // FETCH PROFILE
+
+        async function fetchUserProfile(){
+
+            try{
+
+                const response =
+                    await fetch(
+                        `${API_URL}/user/`,
+                        {
+
+                            method:"GET",
+
+                            headers:{
+                                "Authorization":
+                                    `Bearer ${token}`
+                            }
+
+                        }
+                    );
+
+                const data =
+                    await response.json();
+
+                if(response.ok){
+
+                    const fullName =
+                        `${data.first_name} ${data.last_name}`;
+
+                    // FORM VALUES
+
+                    document
+                        .getElementById("name")
+                        .value = fullName;
+
+                    document
+                        .getElementById("email")
+                        .value = data.email;
+
+                    // CARD VALUES
+
+                    document
+                        .getElementById("profileName")
+                        .innerText = fullName;
+
+                    document
+                        .getElementById("profileAvatar")
+                        .innerText =
+                        data.first_name
+                        .charAt(0)
+                        .toUpperCase();
+
+                }else{
+
+                    alert(
+                        "Failed to load profile."
+                    );
+                }
+
+            }catch(error){
+
+                console.error(error);
+
+                alert(
+                    "Cannot connect to Flask backend."
+                );
+            }
+
+        }
+
+        // CHANGE PASSWORD
+
+        document
+            .getElementById("saveButton")
+
+            .addEventListener(
+                "click",
+
+                async function(){
+
+                    const currentPassword =
+                        document
+                        .getElementById(
+                            "currentPassword"
+                        )
+                        .value;
+
+                    const newPassword =
+                        document
+                        .getElementById(
+                            "newPassword"
+                        )
+                        .value;
+
+                    const messageBox =
+                        document
+                        .getElementById("message");
+
+                    // VALIDATION
+
+                    if(
+                        !currentPassword ||
+                        !newPassword
+                    ){
+
+                        messageBox.innerText =
+                            "Please fill all password fields.";
+
+                        messageBox.className =
+                            "message error";
+
+                        return;
+                    }
+
+                    if(newPassword.length < 6){
+
+                        messageBox.innerText =
+                            "Password must be at least 6 characters.";
+
+                        messageBox.className =
+                            "message error";
+
+                        return;
+                    }
+
+                    try{
+
+                        const response =
+                            await fetch(
+                                `${API_URL}/user/password`,
+                                {
+
+                                    method:"PUT",
+
+                                    headers:{
+                                        "Content-Type":
+                                            "application/json",
+
+                                        "Authorization":
+                                            `Bearer ${token}`
+                                    },
+
+                                    body:JSON.stringify({
+
+                                        password:
+                                            currentPassword,
+
+                                        new_password:
+                                            newPassword
+                                    })
+
+                                }
+                            );
+
+                        const data =
+                            await response.json();
+
+                        if(response.ok){
+
+                            messageBox.innerText =
+                                "Password updated successfully.";
+
+                            messageBox.className =
+                                "message success";
+
+                            // RESET FIELDS
+
+                            document
+                                .getElementById(
+                                    "currentPassword"
+                                )
+                                .value = "";
+
+                            document
+                                .getElementById(
+                                    "newPassword"
+                                )
+                                .value = "";
+
+                        }else{
+
+                            messageBox.innerText =
+                                data.detail ||
+                                "Password update failed.";
+
+                            messageBox.className =
+                                "message error";
+                        }
+
+                    }catch(error){
+
+                        console.error(error);
+
+                        messageBox.innerText =
+                            "Cannot connect to Flask backend.";
+
+                        messageBox.className =
+                            "message error";
+                    }
+
+                }
+            );
+
+        // LOGOUT
+
+        document
+            .getElementById("logoutBtn")
+
+            .addEventListener(
+                "click",
+
+                function(){
+
+                    localStorage.removeItem(
+                        "access_token"
+                    );
+
+                    window.location.href =
+                        "login.html";
+                }
+            );
+
+        // LOAD PROFILE
+
+        fetchUserProfile();
+
     </script>
 
 </body>
